@@ -20,6 +20,11 @@ public:
     Ros2Tcp()
             : Node("minimal_publisher")
     {
+        this->declare_parameter<std::string>("raspberry_ip", "192.168.149.62");
+        this->declare_parameter<ushort>("ip_port", 10000);
+
+        this->get_parameter("raspberry_ip",raspberry_ip);
+        this->get_parameter("ip_port",ip_port);
         pose_subscription_=this->create_subscription<std_msgs::msg::Float64MultiArray>(
                 "/arm_close_gamma", 10, std::bind(&Ros2Tcp::pos_callback, this, _1));
         PWM_subscription_ = this->create_subscription<std_msgs::msg::Int16MultiArray>(
@@ -30,7 +35,7 @@ public:
         //TCP server
         server_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         server_addr.sin_family = AF_INET;  //使用IPv4地址
-        server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");  //具体的IP地址
+        server_addr.sin_addr.s_addr = inet_addr(raspberry_ip.c_str());  //具体的IP地址
         server_addr.sin_port = htons(10000);  //端口
         bind(server_sock, (struct sockaddr*)&server_addr, sizeof(server_addr));
 
@@ -72,6 +77,9 @@ private:
     sockaddr_in server_addr;
     sockaddr_in client_addr;
     Tcp_Pkg tcp_pkg;
+
+    std::string raspberry_ip;
+    ushort ip_port;
 };
 
 int main(int argc, char * argv[])

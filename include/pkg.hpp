@@ -7,12 +7,12 @@
 struct Tcp_Pkg
 {
     double posx=0;
-    double posy=0;
-    double posz=0;
+    double posy=15;
+    double posz=15;
     double pitch=0;
-    double timelen=0;
-    short closepwm=0;
-    short betapwm=0;
-    int magic_num=0;
+    double timelen=3000;
+    short closepwm=200;
+    short betapwm=500;
+    int magic_num=997;
 };
 #endif //NPU_COM_ROS2_NPU_COM_TCP_HPP
