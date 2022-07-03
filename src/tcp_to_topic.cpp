@@ -7,7 +7,9 @@
 #include <unistd.h>
 
 #include "rclcpp/rclcpp.hpp"
-#include "npu_msg/msg/armpkg.hpp"
+#include "std_msgs/msg/int16_multi_array.hpp"
+#include "std_msgs/msg/float64_multi_array.hpp"
+//#include "npu_msg/msg/armpkg.hpp"
 #include "pkg.hpp"
 using std::placeholders::_1;
 
@@ -61,13 +63,9 @@ public:
 private:
     void timer_callback()
     {
-        auto message = npu_msg::msg::Armpkg();
         RCLCPP_INFO(this->get_logger(), "Publishing: '%lf'");
-        publisher_->publish(message);
     }
     rclcpp::TimerBase::SharedPtr timer_;
-    rclcpp::Publisher<npu_msg::msg::Armpkg>::SharedPtr publisher_;
-    rclcpp::Subscription<npu_msg::msg::Armpkg>::SharedPtr subscription_;
 
     int server_sock;
     int client_sock;

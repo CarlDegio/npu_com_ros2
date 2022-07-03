@@ -4,9 +4,6 @@
 
 #ifndef NPU_COM_ROS2_NPU_COM_TCP_HPP
 #define NPU_COM_ROS2_NPU_COM_TCP_HPP
-
-#endif //NPU_COM_ROS2_NPU_COM_TCP_HPP
-
 struct Tcp_Pkg
 {
     double posx=0;
@@ -14,7 +11,8 @@ struct Tcp_Pkg
     double posz=0;
     double pitch=0;
     double timelen=0;
-    int closepwm=0;
-    int betapwm=0;
+    short closepwm=0;
+    short betapwm=0;
     int magic_num=0;
 };
+#endif //NPU_COM_ROS2_NPU_COM_TCP_HPP

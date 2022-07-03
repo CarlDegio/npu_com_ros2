@@ -14,18 +14,16 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(npu_msg REQUIRED)
 
 include_directories(include)
 
 add_executable(topic2tcp src/topic_to_tcp.cpp include/pkg.hpp)
-add_executable(tcp2topic src/tcp_to_topic.cpp include/pkg.hpp)
-ament_target_dependencies(topic2tcp rclcpp npu_msg)
-ament_target_dependencies(tcp2topic rclcpp npu_msg)
+#add_executable(tcp2topic src/tcp_to_topic.cpp include/pkg.hpp)
+ament_target_dependencies(topic2tcp rclcpp std_msgs)
+#ament_target_dependencies(tcp2topic rclcpp std_msgs)
 
 install(TARGETS
   topic2tcp
-  tcp2topic
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
